@@ -54,7 +54,7 @@ export function FilterBar() {
               className={cn(
                 'flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-all duration-200',
                 isActive
-                  ? 'bg-primary text-white border-primary shadow-glow-blue'
+                  ? 'bg-primary text-white border-primary shadow-glow-orange'
                   : 'bg-card text-text-secondary border-border hover:border-border-active hover:text-primary'
               )}
             >
@@ -73,11 +73,11 @@ export function FilterBar() {
           className={cn(
             'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-all duration-200',
             currentImportant
-              ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/40'
-              : 'bg-card text-text-secondary border-border hover:border-yellow-500/40 hover:text-yellow-400'
+              ? 'bg-yellow-50 text-yellow-700 border-yellow-200'
+              : 'bg-card text-text-secondary border-border hover:border-yellow-200 hover:text-yellow-700'
           )}
         >
-          <Star className={cn('w-3.5 h-3.5', currentImportant && 'fill-yellow-400')} />
+          <Star className={cn('w-3.5 h-3.5', currentImportant && 'fill-yellow-600')} />
           Importantes
         </button>
 

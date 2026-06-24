@@ -59,8 +59,8 @@ export function CaptureButton() {
         disabled={isDisabled}
         className={cn(
           'relative w-44 h-44 rounded-full flex flex-col items-center justify-center gap-2',
-          'bg-gradient-to-br from-primary to-violet',
-          'shadow-glow-blue hover:shadow-glow-violet',
+          'bg-gradient-to-br from-primary to-amber',
+          'shadow-glow-orange hover:shadow-glow-amber',
           'transition-all duration-300 active:scale-95',
           'disabled:opacity-60 disabled:cursor-not-allowed',
           state === 'error' && 'from-danger to-red-700'

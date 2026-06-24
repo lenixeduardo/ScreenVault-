@@ -1,7 +1,7 @@
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import type { AIAnalysisResult } from '@/types';
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 const SYSTEM_PROMPT = `You are an expert document and screenshot analyzer specializing in OCR and content categorization.
 Analyze screenshots and return ONLY a valid JSON object — no markdown fences, no extra text, no explanation.`;
@@ -40,50 +40,40 @@ Rules:
 - Return ONLY the JSON object, absolutely nothing else`;
 
 export async function analyzeImage(imageBase64: string, mediaType: string): Promise<AIAnalysisResult> {
-  const validMediaTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'] as const;
-  type ValidMediaType = typeof validMediaTypes[number];
+  const safeMediaType = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(mediaType)
+    ? mediaType
+    : 'image/jpeg';
 
-  const safeMediaType: ValidMediaType = validMediaTypes.includes(mediaType as ValidMediaType)
-    ? (mediaType as ValidMediaType)
-    : 'image/png';
-
-  const response = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 2048,
-    system: SYSTEM_PROMPT,
-    messages: [
-      {
-        role: 'user',
-        content: [
-          {
-            type: 'image',
-            source: {
-              type: 'base64',
-              media_type: safeMediaType,
-              data: imageBase64,
-            },
-          },
-          { type: 'text', text: USER_PROMPT },
-        ],
-      },
-    ],
+  const model = genAI.getGenerativeModel({
+    model: 'gemini-1.5-flash',
+    systemInstruction: SYSTEM_PROMPT,
   });
 
-  const text = response.content[0].type === 'text' ? response.content[0].text : '';
+  const result = await model.generateContent([
+    {
+      inlineData: {
+        data: imageBase64,
+        mimeType: safeMediaType,
+      },
+    },
+    USER_PROMPT,
+  ]);
+
+  const text = result.response.text();
   const cleaned = text
     .replace(/^```(?:json)?\n?/m, '')
     .replace(/\n?```$/m, '')
     .trim();
 
   try {
-    const result = JSON.parse(cleaned) as AIAnalysisResult;
+    const parsed = JSON.parse(cleaned) as AIAnalysisResult;
     const validCategories = ['financial', 'tasks', 'messages', 'documents', 'code', 'links', 'dates', 'others'];
-    if (!validCategories.includes(result.category)) {
-      result.category = 'others';
+    if (!validCategories.includes(parsed.category)) {
+      parsed.category = 'others';
     }
-    if (!Array.isArray(result.tags)) result.tags = [];
-    if (!result.metadata) result.metadata = {};
-    return result;
+    if (!Array.isArray(parsed.tags)) parsed.tags = [];
+    if (!parsed.metadata) parsed.metadata = {};
+    return parsed;
   } catch {
     throw new Error(`Failed to parse AI response as JSON. Raw response: ${text.slice(0, 300)}`);
   }
