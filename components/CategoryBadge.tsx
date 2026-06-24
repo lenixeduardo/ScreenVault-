@@ -4,42 +4,42 @@ import type { CaptureCategory } from '@/types';
 const CATEGORY_CONFIG: Record<CaptureCategory, { label: string; color: string; dot: string }> = {
   financial: {
     label: 'Financeiro',
-    color: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-    dot: 'bg-emerald-400',
+    color: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    dot: 'bg-emerald-500',
   },
   tasks: {
     label: 'Tarefas',
-    color: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
-    dot: 'bg-blue-400',
+    color: 'bg-blue-50 text-blue-700 border-blue-200',
+    dot: 'bg-blue-500',
   },
   messages: {
     label: 'Mensagens',
-    color: 'bg-violet-500/15 text-violet-400 border-violet-500/30',
-    dot: 'bg-violet-400',
+    color: 'bg-violet-50 text-violet-700 border-violet-200',
+    dot: 'bg-violet-500',
   },
   documents: {
     label: 'Documentos',
-    color: 'bg-orange-500/15 text-orange-400 border-orange-500/30',
-    dot: 'bg-orange-400',
+    color: 'bg-orange-50 text-orange-700 border-orange-200',
+    dot: 'bg-orange-500',
   },
   code: {
     label: 'Código',
-    color: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/30',
-    dot: 'bg-cyan-400',
+    color: 'bg-cyan-50 text-cyan-700 border-cyan-200',
+    dot: 'bg-cyan-500',
   },
   links: {
     label: 'Links',
-    color: 'bg-pink-500/15 text-pink-400 border-pink-500/30',
-    dot: 'bg-pink-400',
+    color: 'bg-pink-50 text-pink-700 border-pink-200',
+    dot: 'bg-pink-500',
   },
   dates: {
     label: 'Datas',
-    color: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30',
-    dot: 'bg-yellow-400',
+    color: 'bg-yellow-50 text-yellow-700 border-yellow-200',
+    dot: 'bg-yellow-500',
   },
   others: {
     label: 'Outros',
-    color: 'bg-slate-500/15 text-slate-400 border-slate-500/30',
+    color: 'bg-slate-100 text-slate-600 border-slate-200',
     dot: 'bg-slate-400',
   },
 };

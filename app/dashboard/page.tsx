@@ -7,7 +7,10 @@ import type { Capture, CaptureCategory } from '@/types';
 import { Suspense } from 'react';
 
 interface DashboardPageProps {
-  searchParams: { category?: string; important?: string };
+  searchParams: {
+    category?: string;
+    important?: string;
+  };
 }
 
 async function getCaptures(searchParams: DashboardPageProps['searchParams']): Promise<Capture[]> {
@@ -40,12 +43,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   return (
     <main className="min-h-screen bg-background pb-24">
       <div className="max-w-lg mx-auto px-4">
+        {/* Header */}
         <header className="pt-14 pb-6">
           <div className="flex items-center justify-between mb-1">
             <h1 className="text-2xl font-bold text-text-primary">Dashboard</h1>
             <Link
               href="/home"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl gradient-brand text-white text-sm font-medium shadow-glow-blue hover:opacity-90 transition-opacity"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl gradient-brand text-white text-sm font-medium shadow-glow-orange hover:opacity-90 transition-opacity"
             >
               <Camera className="w-4 h-4" />
               Capturar
@@ -58,10 +62,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
           </p>
         </header>
 
+        {/* Filters */}
         <Suspense fallback={null}>
           <FilterBar />
         </Suspense>
 
+        {/* Grid */}
         {captures.length > 0 ? (
           <div className="grid grid-cols-2 gap-3 mt-6">
             {captures.map((capture) => (
@@ -75,10 +81,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             </div>
             <p className="text-text-secondary font-medium">Nenhuma captura encontrada</p>
             <p className="text-text-muted text-sm mt-1">
-              {activeCategory !== 'all' || isImportant ? 'Tente remover os filtros' : 'Capture sua primeira tela!'}
+              {activeCategory !== 'all' || isImportant
+                ? 'Tente remover os filtros'
+                : 'Capture sua primeira tela!'}
             </p>
             <Link href="/home" className="btn-primary mt-6">
-              <Camera className="w-4 h-4" />Nova captura
+              <Camera className="w-4 h-4" />
+              Nova captura
             </Link>
           </div>
         )}

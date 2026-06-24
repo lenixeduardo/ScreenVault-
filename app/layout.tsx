@@ -1,10 +1,14 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { Navbar } from '@/components/Navbar';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-poppins',
+});
 
 export const metadata: Metadata = {
   title: 'ScreenVault AI',
@@ -16,23 +20,23 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
-  themeColor: '#0B0E1A',
+  themeColor: '#F97316',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className="dark">
-      <body className={`${inter.className} bg-background text-text-primary antialiased`}>
+    <html lang="pt-BR">
+      <body className={`${poppins.className} bg-background text-text-primary antialiased`}>
         {children}
         <Navbar />
         <Toaster
-          theme="dark"
+          theme="light"
           position="bottom-right"
           toastOptions={{
             style: {
-              background: '#1A1D2E',
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: '#F1F5F9',
+              background: '#FFFFFF',
+              border: '1px solid rgba(0,0,0,0.08)',
+              color: '#0F172A',
             },
           }}
         />

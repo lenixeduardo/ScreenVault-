@@ -30,28 +30,35 @@ export default function ProcessingPage() {
 
   return (
     <main className="min-h-screen bg-background flex items-center justify-center p-4">
+      {/* Background glow */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative w-full max-w-sm">
         <div className="glass rounded-3xl p-8 text-center space-y-8">
+          {/* Icon */}
           <div className="flex justify-center">
             <div className="relative">
-              <div className="w-20 h-20 rounded-3xl gradient-brand flex items-center justify-center shadow-glow-blue">
+              <div className="w-20 h-20 rounded-3xl gradient-brand flex items-center justify-center shadow-glow-orange">
                 <Camera className="w-10 h-10 text-white" />
               </div>
               <div className="absolute -inset-2 rounded-[2rem] bg-primary/20 animate-ping" />
             </div>
           </div>
 
+          {/* Title */}
           <div>
             <h1 className="text-xl font-bold text-text-primary">Analisando captura</h1>
-            <p className="text-text-muted text-sm mt-1">Nossa IA está processando sua imagem</p>
+            <p className="text-text-muted text-sm mt-1">
+              Nossa IA está processando sua imagem
+            </p>
           </div>
 
+          {/* Steps */}
           <ProcessingSteps />
 
+          {/* Progress bar */}
           <div className="space-y-2">
             <div className="h-1.5 bg-surface rounded-full overflow-hidden">
               <div
@@ -59,7 +66,9 @@ export default function ProcessingPage() {
                 style={{ width: '60%' }}
               />
             </div>
-            <p className="text-text-muted text-xs">Isso pode levar de 5 a 15 segundos...</p>
+            <p className="text-text-muted text-xs">
+              Isso pode levar de 5 a 15 segundos...
+            </p>
           </div>
         </div>
       </div>

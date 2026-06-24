@@ -8,7 +8,7 @@ export async function exportAsPDF(elementId: string, filename: string): Promise<
   if (!element) throw new Error('Element not found');
 
   const canvas = await html2canvas(element, {
-    backgroundColor: '#0B0E1A',
+    backgroundColor: '#FAFAFA',
     scale: 2,
     useCORS: true,
   });
@@ -38,9 +38,9 @@ export function downloadMarkdown(capture: Capture): void {
     '## Extracted Text',
     '',
     capture.extracted_text ?? '_No text extracted_',
+    '',
     ...(capture.metadata
       ? [
-          '',
           '## Metadata',
           '',
           ...Object.entries(capture.metadata)

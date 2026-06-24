@@ -19,14 +19,14 @@ async function getRecentCaptures(): Promise<Capture[]> {
 }
 
 const CATEGORY_SHORTCUTS = [
-  { href: '/dashboard?category=financial', icon: TrendingUp, label: 'Financeiro', color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' },
-  { href: '/dashboard?category=tasks', icon: CheckSquare, label: 'Tarefas', color: 'text-blue-400 bg-blue-500/10 border-blue-500/20' },
-  { href: '/dashboard?category=messages', icon: MessageSquare, label: 'Mensagens', color: 'text-violet-400 bg-violet-500/10 border-violet-500/20' },
-  { href: '/dashboard?category=documents', icon: FileText, label: 'Documentos', color: 'text-orange-400 bg-orange-500/10 border-orange-500/20' },
-  { href: '/dashboard?category=code', icon: Code2, label: 'Código', color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20' },
-  { href: '/dashboard?category=links', icon: LinkIcon, label: 'Links', color: 'text-pink-400 bg-pink-500/10 border-pink-500/20' },
-  { href: '/dashboard?category=dates', icon: Calendar, label: 'Datas', color: 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20' },
-  { href: '/dashboard?category=others', icon: MoreHorizontal, label: 'Outros', color: 'text-slate-400 bg-slate-500/10 border-slate-500/20' },
+  { href: '/dashboard?category=financial', icon: TrendingUp, label: 'Financeiro', color: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
+  { href: '/dashboard?category=tasks', icon: CheckSquare, label: 'Tarefas', color: 'text-blue-700 bg-blue-50 border-blue-200' },
+  { href: '/dashboard?category=messages', icon: MessageSquare, label: 'Mensagens', color: 'text-violet-700 bg-violet-50 border-violet-200' },
+  { href: '/dashboard?category=documents', icon: FileText, label: 'Documentos', color: 'text-orange-700 bg-orange-50 border-orange-200' },
+  { href: '/dashboard?category=code', icon: Code2, label: 'Código', color: 'text-cyan-700 bg-cyan-50 border-cyan-200' },
+  { href: '/dashboard?category=links', icon: LinkIcon, label: 'Links', color: 'text-pink-700 bg-pink-50 border-pink-200' },
+  { href: '/dashboard?category=dates', icon: Calendar, label: 'Datas', color: 'text-yellow-700 bg-yellow-50 border-yellow-200' },
+  { href: '/dashboard?category=others', icon: MoreHorizontal, label: 'Outros', color: 'text-slate-600 bg-slate-100 border-slate-200' },
 ];
 
 export default async function HomePage() {
@@ -35,6 +35,7 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen bg-background pb-24">
       <div className="max-w-lg mx-auto px-4">
+        {/* Header */}
         <header className="pt-14 pb-8">
           <div className="flex items-center justify-between mb-1">
             <div>
@@ -53,6 +54,7 @@ export default async function HomePage() {
           </div>
         </header>
 
+        {/* Capture section */}
         <section className="flex flex-col items-center py-8 mb-8">
           <p className="text-text-secondary text-sm mb-8 text-center">
             Capture uma tela e deixe a IA extrair e organizar as informações
@@ -60,6 +62,7 @@ export default async function HomePage() {
           <CaptureButton />
         </section>
 
+        {/* Category shortcuts */}
         <section className="mb-8">
           <h2 className="text-text-primary font-semibold text-sm mb-3">Categorias rápidas</h2>
           <div className="grid grid-cols-4 gap-2">
@@ -76,11 +79,14 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* Recent captures */}
         {recentCaptures.length > 0 && (
           <section>
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-text-primary font-semibold text-sm">Capturas recentes</h2>
-              <Link href="/dashboard" className="text-primary text-xs hover:underline">Ver todas</Link>
+              <Link href="/dashboard" className="text-primary text-xs hover:underline">
+                Ver todas
+              </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {recentCaptures.map((capture) => (
